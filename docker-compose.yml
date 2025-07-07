@@ -1,0 +1,18 @@
+services:
+  # O serviço da sua aplicação principal.
+  app:
+    # Constrói a imagem a partir do Dockerfile no diretório atual ('.').
+    build: .
+    # Nome do contêiner para fácil identificação.
+    container_name: api
+    # Mapeia a porta 3000 do contêiner para a porta 3000 da sua máquina host.
+    # Formato: <HOST_PORT>:<CONTAINER_PORT>
+    ports:
+      - "8000:8000"
+    # Monta o diretório atual ('.') no diretório /usr/src/app do contêiner.
+    # Isso permite que você altere o código na sua máquina e veja as mudanças
+    # refletidas no contêiner sem precisar reconstruir a imagem (ótimo para desenvolvimento).
+    volumes:
+      - .:/app
+      # Adiciona um volume anônimo para a pasta node_modules para evitar que
+      # a pasta local (que pode não ter nada ou ser de outro SO) sobrescreva a do contêiner.
